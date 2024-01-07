@@ -51,6 +51,7 @@ const iconMapping = {
 
 function ItemCardTemplate({ title, description, imageUrl, selectedIcons }) {
   const [descriptionTop, setDescriptionTop] = useState("73%");
+  console.log({ title, description, imageUrl, selectedIcons }); // Debugging
 
   useEffect(() => {
     const adjustTopBasedOnLength = (length) => {
@@ -145,7 +146,7 @@ function ItemCardTemplate({ title, description, imageUrl, selectedIcons }) {
           style={{
             position: "absolute",
             bottom: 18,
-            right: 27,
+            right: 28,
             display: "flex",
             zIndex: 5,
           }}
@@ -159,7 +160,7 @@ function ItemCardTemplate({ title, description, imageUrl, selectedIcons }) {
                 style={{
                   width: "19px",
                   height: "19px",
-                  marginLeft: index > 0 ? "5px" : "0",
+                  marginLeft: index > 0 ? "-1px" : "0",
                 }}
               />
             ))}

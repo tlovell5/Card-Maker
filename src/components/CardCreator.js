@@ -1,5 +1,7 @@
 import React, { useState, useCallback, useRef } from "react";
-import { Select, MenuItem } from "@mui/material";
+import { Select, MenuItem, Button } from "@mui/material";
+import html2canvas from "html2canvas";
+import { supabase } from "./supabaseClient"; // Adjust this path
 import CardTypeSelector from "./CardTypeSelector";
 import ItemCardTemplate from "./ItemCardTemplate";
 import AbilityCardTemplate from "./AbilityCardTemplate";
@@ -40,6 +42,7 @@ function CardCreator() {
   const [crop, setCrop] = useState({ aspect: 16 / 9, width: 50, unit: "%" });
   const [croppedImageUrl, setCroppedImageUrl] = useState("");
   const imageRef = useRef(null);
+  const cardRef = useRef(null); // Reference to the card element
 
   const handleCardTypeChange = (type) => {
     setSelectedCardType(type);
@@ -137,9 +140,41 @@ function CardCreator() {
         return <ItemCardTemplate {...cardProps} />;
       case "Ability":
         return <AbilityCardTemplate {...cardProps} />;
-      // Add cases for other card types here
       default:
         return <p>Select a card type</p>;
+    }
+  };
+
+  const downloadCardImage = async () => {
+    if (cardRef.current) {
+      const canvas = await html2canvas(cardRef.current);
+      const image = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.href = image;
+      link.download = "card-image.png";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
+  const saveCardToDatabase = async () => {
+    // Add logic to save card data to Supabase
+    const { data, error } = await supabase
+      .from("cards") // 'cards' is your table name in Supabase
+      .insert([
+        {
+          title: cardDetails.title,
+          description: cardDetails.description,
+          imageUrl: croppedImageUrl || cardDetails.imageUrl,
+          selectedIcons: cardDetails.selectedIcons,
+        },
+      ]);
+
+    if (error) {
+      console.error("Error saving card:", error);
+    } else {
+      console.log("Card saved successfully:", data);
     }
   };
 
@@ -147,6 +182,7 @@ function CardCreator() {
     <div className="card-creator-container">
       <div className="input-container">
         <CardTypeSelector onCardTypeChange={handleCardTypeChange} />
+
         <input
           type="text"
           name="title"
@@ -186,8 +222,19 @@ function CardCreator() {
             onChange={(newCrop) => setCrop(newCrop)}
           />
         )}
+        <Button onClick={downloadCardImage} style={{ marginTop: "10px" }}>
+          Download Card
+        </Button>
+        <Button
+          onClick={saveCardToDatabase}
+          style={{ marginTop: "10px", marginLeft: "10px" }}
+        >
+          Save Card
+        </Button>
       </div>
-      <div className="card-preview">{renderCardTemplate()}</div>
+      <div className="card-preview" ref={cardRef}>
+        {renderCardTemplate()}
+      </div>
     </div>
   );
 }
