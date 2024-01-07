@@ -1,13 +1,58 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, Typography } from "@mui/material";
-import itemCardTemplateImage from "../assets/ItemCardTemplate.png"; // Adjust path as necessary
+import itemCardTemplateImage from "../assets/ItemCardTemplate.png";
 import "./ItemCardTemplate.css";
 
-function ItemCardTemplate({ title, description, imageUrl }) {
+// Import your icons
+import fireIcon from "../assets/Fire.png";
+import damageIcon from "../assets/Damage.png";
+import healingIcon from "../assets/Healing.png";
+import shieldingIcon from "../assets/Shielding.png";
+import iceIcon from "../assets/Ice.png";
+import natureIcon from "../assets/Nature.png";
+import arcaneIcon from "../assets/Arcane.png";
+import stealthIcon from "../assets/Stealth.png";
+import buffIcon from "../assets/Buff.png";
+import debuffIcon from "../assets/Debuff.png";
+import lightningIcon from "../assets/Lightning.png";
+import summoningIcon from "../assets/Summoning.png";
+import poisonIcon from "../assets/Poison.png";
+import enchantmentIcon from "../assets/Enchantment.png";
+import terrainIcon from "../assets/Terrain.png";
+import curseIcon from "../assets/Curse.png";
+import illusionIcon from "../assets/Illusion.png";
+import mindControlIcon from "../assets/MindControl.png";
+import timeIcon from "../assets/Time.png";
+import darknessIcon from "../assets/Darkness.png";
+
+// Mapping from icon names to the imported images
+const iconMapping = {
+  Fire: fireIcon,
+  Damage: damageIcon,
+  Healing: healingIcon,
+  Shielding: shieldingIcon,
+  Ice: iceIcon,
+  Nature: natureIcon,
+  Arcane: arcaneIcon,
+  Stealth: stealthIcon,
+  Buff: buffIcon,
+  Debuff: debuffIcon,
+  Lightning: lightningIcon,
+  Summoning: summoningIcon,
+  Poison: poisonIcon,
+  Enchantment: enchantmentIcon,
+  Terrain: terrainIcon,
+  Curse: curseIcon,
+  Illusion: illusionIcon,
+  MindControl: mindControlIcon,
+  Time: timeIcon,
+  Darkness: darknessIcon,
+};
+
+function ItemCardTemplate({ title, description, imageUrl, selectedIcons }) {
   const [descriptionTop, setDescriptionTop] = useState("73%");
 
   useEffect(() => {
-    // Gradually adjust 'top' based on the length of the description
     const adjustTopBasedOnLength = (length) => {
       const maxLength = 100; // Adjust this for finer control
       const minTop = 66;
@@ -96,6 +141,29 @@ function ItemCardTemplate({ title, description, imageUrl }) {
         >
           {description}
         </Typography>
+        <div
+          style={{
+            position: "absolute",
+            bottom: 18,
+            right: 27,
+            display: "flex",
+            zIndex: 5,
+          }}
+        >
+          {selectedIcons &&
+            selectedIcons.map((iconName, index) => (
+              <img
+                key={index}
+                src={iconMapping[iconName]} // Use the mapped icon
+                alt={iconName}
+                style={{
+                  width: "19px",
+                  height: "19px",
+                  marginLeft: index > 0 ? "5px" : "0",
+                }}
+              />
+            ))}
+        </div>
       </CardContent>
     </Card>
   );

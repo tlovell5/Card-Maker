@@ -1,9 +1,33 @@
 import React, { useState, useCallback, useRef } from "react";
+import { Select, MenuItem } from "@mui/material";
 import CardTypeSelector from "./CardTypeSelector";
 import ItemCardTemplate from "./ItemCardTemplate";
 import AbilityCardTemplate from "./AbilityCardTemplate";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
+
+const options = [
+  "Fire",
+  "Damage",
+  "Healing",
+  "Shielding",
+  "Ice",
+  "Nature",
+  "Arcane",
+  "Stealth",
+  "Buff",
+  "Debuff",
+  "Lightning",
+  "Summoning",
+  "Poison",
+  "Enchantment",
+  "Terrain",
+  "Curse",
+  "Illusion",
+  "Mind Control",
+  "Time",
+  "Darkness",
+];
 
 function CardCreator() {
   const [selectedCardType, setSelectedCardType] = useState("");
@@ -11,6 +35,7 @@ function CardCreator() {
     title: "",
     description: "",
     imageUrl: "",
+    selectedIcons: [],
   });
   const [crop, setCrop] = useState({ aspect: 16 / 9, width: 50, unit: "%" });
   const [croppedImageUrl, setCroppedImageUrl] = useState("");
@@ -26,6 +51,18 @@ function CardCreator() {
       ...prevDetails,
       [name]: value,
     }));
+  };
+
+  const handleIconSelect = (event) => {
+    if (
+      cardDetails.selectedIcons.length < 4 &&
+      !cardDetails.selectedIcons.includes(event.target.value)
+    ) {
+      setCardDetails({
+        ...cardDetails,
+        selectedIcons: [...cardDetails.selectedIcons, event.target.value],
+      });
+    }
   };
 
   const handleImageChange = (event) => {
@@ -123,6 +160,21 @@ function CardCreator() {
           value={cardDetails.description}
           onChange={handleInputChange}
         />
+        <Select
+          value=""
+          onChange={handleIconSelect}
+          displayEmpty
+          style={{ marginTop: 10 }}
+        >
+          <MenuItem value="" disabled>
+            Select type
+          </MenuItem>
+          {options.map((option) => (
+            <MenuItem key={option} value={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
         <input type="file" accept="image/*" onChange={handleImageChange} />
         {cardDetails.imageUrl && (
           <ReactCrop
