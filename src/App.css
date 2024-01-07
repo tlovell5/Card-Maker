@@ -1,38 +1,105 @@
+/* General styles for the app */
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+/* Styles for the card creation section */
+.card-creator-container {
+  display: flex;
+  align-items: flex-start;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Styles for the input section */
+.input-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  margin-right: 20px;
+}
+
+input[type="text"], textarea, input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+textarea {
+  height: 100px;
+}
+
+/* Styles for the card preview */
+.card-preview {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Styles for the card component */
+.card {
+  width: 2.5in;
+  height: 3.5in;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card-media {
+  width: 100%;
+  height: 100%; /* Adjust if necessary */
+  object-fit: cover;
+}
+
+.card-title, .card-description {
+  padding: 0 10px;
+}
+
+.card-title {
+  font-size: 20px;
+  color: #333;
+}
+
+.card-description {
+  font-size: 14px;
+  color: #555;
+}
+
+.card-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%; /* Adjust the height as needed */
+  overflow: hidden;
+}
+
+.card-background-image {
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  top: 14%; /* Adjust to lower the image */
+  left: 0%;
+  z-index: 1;
+}
+
+.card-overlay-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.card-title-top {
+  font-family: 'IM Fell English SC', serif;
+  /* Add more styling as needed */
 }
