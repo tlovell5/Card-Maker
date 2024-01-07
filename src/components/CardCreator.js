@@ -6,6 +6,7 @@ import CardTypeSelector from "./CardTypeSelector";
 import ItemCardTemplate from "./ItemCardTemplate";
 import AbilityCardTemplate from "./AbilityCardTemplate";
 import ReactCrop from "react-image-crop";
+import { Link } from "react-router-dom";
 import "react-image-crop/dist/ReactCrop.css";
 
 const options = [
@@ -159,22 +160,25 @@ function CardCreator() {
   };
 
   const saveCardToDatabase = async () => {
-    // Add logic to save card data to Supabase
-    const { data, error } = await supabase
-      .from("cards") // 'cards' is your table name in Supabase
-      .insert([
+    if (cardRef.current) {
+      const canvas = await html2canvas(cardRef.current);
+      const cardImage = canvas.toDataURL("image/png");
+
+      // Save this cardImage to Supabase
+      const { data, error } = await supabase.from("cards").insert([
         {
           title: cardDetails.title,
           description: cardDetails.description,
-          imageUrl: croppedImageUrl || cardDetails.imageUrl,
+          imageUrl: cardImage, // Save the captured image
           selectedIcons: cardDetails.selectedIcons,
         },
       ]);
 
-    if (error) {
-      console.error("Error saving card:", error);
-    } else {
-      console.log("Card saved successfully:", data);
+      if (error) {
+        console.error("Error saving card:", error);
+      } else {
+        console.log("Card saved successfully:", data);
+      }
     }
   };
 
@@ -182,7 +186,6 @@ function CardCreator() {
     <div className="card-creator-container">
       <div className="input-container">
         <CardTypeSelector onCardTypeChange={handleCardTypeChange} />
-
         <input
           type="text"
           name="title"
@@ -202,9 +205,6 @@ function CardCreator() {
           displayEmpty
           style={{ marginTop: 10 }}
         >
-          <MenuItem value="" disabled>
-            Select type
-          </MenuItem>
           {options.map((option) => (
             <MenuItem key={option} value={option}>
               {option}
@@ -231,6 +231,11 @@ function CardCreator() {
         >
           Save Card
         </Button>
+        <Link to="/gallery" style={{ textDecoration: "none" }}>
+          <Button style={{ marginTop: "10px", marginLeft: "10px" }}>
+            Go to Card Gallery
+          </Button>
+        </Link>
       </div>
       <div className="card-preview" ref={cardRef}>
         {renderCardTemplate()}

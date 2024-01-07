@@ -20,7 +20,11 @@ function CardGallery() {
         <div key={index}>
           <h3>{card.title}</h3>
           <p>{card.description}</p>
-          {/* Display card image and icons */}
+          <img
+            src={card.imageUrl}
+            alt={card.title}
+            style={{ width: "2.5in", height: "3.5in" }}
+          />
         </div>
       ))}
     </div>
