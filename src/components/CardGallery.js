@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "./supabaseClient"; // Adjust path as necessary
+import "./CardGallery.css"; // Import the CSS file
 
 function CardGallery() {
   const [cards, setCards] = useState([]);
@@ -15,20 +16,13 @@ function CardGallery() {
   }, []);
 
   return (
-    <div>
+    <div className="card-gallery">
       {cards.map((card, index) => (
-        <div key={index}>
-          <h3>{card.title}</h3>
-          <p>{card.description}</p>
-          <img
-            src={card.imageUrl}
-            alt={card.title}
-            style={{ width: "2.5in", height: "3.5in" }}
-          />
+        <div key={index} className="card-container">
+          <img src={card.imageUrl} alt={card.title} className="card-image" />
         </div>
       ))}
     </div>
   );
 }
-
 export default CardGallery;

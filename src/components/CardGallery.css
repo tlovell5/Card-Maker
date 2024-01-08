@@ -1,0 +1,28 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Ensure full height */
+  }
+  
+  .card-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Aligns content to the left */
+    align-items: flex-start; /* Aligns rows to the top */
+    padding: 0; /* No padding around the gallery */
+    margin: 0; /* No margin around the gallery */
+  }
+  
+  .card-container {
+    width: calc(33.333% - 10px); /* Each card takes up a third of the width minus margin */
+    height: calc(3.5in * 33.333% / 2.5); /* Height relative to the width to maintain aspect ratio */
+    margin: 0px; /* Space between cards */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+  }
+  
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the card area */
+  }
+  
