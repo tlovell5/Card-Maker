@@ -137,9 +137,9 @@ function CardCreator() {
       imageUrl: croppedImageUrl || cardDetails.imageUrl,
     };
     switch (selectedCardType) {
-      case "Item":
-        return <ItemCardTemplate {...cardProps} />;
       case "Ability":
+        return <ItemCardTemplate {...cardProps} />;
+      case "Item":
         return <AbilityCardTemplate {...cardProps} />;
       default:
         return <p>Select a card type</p>;
@@ -231,11 +231,7 @@ function CardCreator() {
         >
           Save Card
         </Button>
-        <Link to="/gallery" style={{ textDecoration: "none" }}>
-          <Button style={{ marginTop: "10px", marginLeft: "10px" }}>
-            Go to Card Gallery
-          </Button>
-        </Link>
+        <Link to="/gallery" style={{ textDecoration: "none" }}></Link>
       </div>
       <div className="card-preview" ref={cardRef}>
         {renderCardTemplate()}

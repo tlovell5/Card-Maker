@@ -84,7 +84,7 @@ function AbilityCardTemplate({ title, description, imageUrl, selectedIcons }) {
             fontFamily: "'IM Fell English SC', serif",
             textAlign: "center",
             position: "absolute",
-            top: -1,
+            top: -1.7,
             left: "50%",
             transform: "translateX(-50%)",
             zIndex: 3,
@@ -95,7 +95,7 @@ function AbilityCardTemplate({ title, description, imageUrl, selectedIcons }) {
           }}
           variant="h6"
         >
-          Ability
+          Item
         </Typography>
       </div>
       <CardContent>

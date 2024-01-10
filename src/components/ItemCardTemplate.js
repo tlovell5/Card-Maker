@@ -96,7 +96,7 @@ function ItemCardTemplate({ title, description, imageUrl, selectedIcons }) {
           }}
           variant="h6"
         >
-          Item
+          Ability
         </Typography>
       </div>
       <CardContent>
