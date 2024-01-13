@@ -49,7 +49,14 @@ const iconMapping = {
   Darkness: darknessIcon,
 };
 
-function AbilityCardTemplate({ title, description, imageUrl, selectedIcons }) {
+function AbilityCardTemplate({
+  title,
+  description,
+  imageUrl,
+  selectedIcons,
+  aggro,
+  rounds,
+}) {
   const [descriptionTop, setDescriptionTop] = useState("73%");
 
   useEffect(() => {
@@ -108,7 +115,7 @@ function AbilityCardTemplate({ title, description, imageUrl, selectedIcons }) {
             textAlign: "center",
             fontSize: "19px",
             fontFamily: "'IM Fell English SC', serif",
-            top: "58.5%",
+            top: "58%",
             left: "-4%",
             position: "absolute",
             zIndex: 3,
@@ -129,7 +136,7 @@ function AbilityCardTemplate({ title, description, imageUrl, selectedIcons }) {
             left: "50%",
             transform: "translateX(-50%)",
             zIndex: 3,
-            fontSize: "17px",
+            fontSize: "14px",
             color: "black",
             width: "calc(80% - 20px)",
             padding: "10px 0",
@@ -140,6 +147,21 @@ function AbilityCardTemplate({ title, description, imageUrl, selectedIcons }) {
           }}
         >
           {description}
+        </Typography>
+        <Typography
+          variant="body2"
+          style={{
+            position: "absolute",
+            bottom: 30,
+            left: 30,
+            zIndex: 3,
+            fontSize: "8.5px",
+            fontFamily: "'IM Fell English SC', serif",
+            color: "black",
+            letterSpacing: "-.8px", // Adjust this value as needed
+          }}
+        >
+          {`Aggro: ${aggro} | Rounds: ${rounds}`}
         </Typography>
         <div
           style={{

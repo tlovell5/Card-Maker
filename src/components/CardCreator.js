@@ -135,6 +135,8 @@ function CardCreator() {
     const cardProps = {
       ...cardDetails,
       imageUrl: croppedImageUrl || cardDetails.imageUrl,
+      aggro: cardDetails.aggro,
+      rounds: cardDetails.rounds,
     };
     switch (selectedCardType) {
       case "Ability":
@@ -175,6 +177,8 @@ function CardCreator() {
           description: cardDetails.description,
           imageUrl: cardImage, // Save the captured image
           selectedIcons: cardDetails.selectedIcons,
+          aggro: cardDetails.aggro, // Add the aggro value
+          rounds: cardDetails.rounds, // Add the rounds value
         },
       ]);
 
@@ -218,6 +222,25 @@ function CardCreator() {
             </MenuItem>
           ))}
         </Select>
+        <input
+          type="text"
+          name="aggro"
+          placeholder="Aggro"
+          value={cardDetails.aggro}
+          onChange={(e) =>
+            setCardDetails({ ...cardDetails, aggro: e.target.value })
+          }
+        />
+        <input
+          type="text"
+          name="rounds"
+          placeholder="Rounds"
+          value={cardDetails.rounds}
+          onChange={(e) =>
+            setCardDetails({ ...cardDetails, rounds: e.target.value })
+          }
+        />
+
         <input type="file" accept="image/*" onChange={handleImageChange} />
         {cardDetails.imageUrl && (
           <ReactCrop

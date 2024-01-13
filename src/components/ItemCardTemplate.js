@@ -49,7 +49,14 @@ const iconMapping = {
   Darkness: darknessIcon,
 };
 
-function ItemCardTemplate({ title, description, imageUrl, selectedIcons }) {
+function ItemCardTemplate({
+  title,
+  description,
+  imageUrl,
+  selectedIcons,
+  aggro,
+  rounds,
+}) {
   const [descriptionTop, setDescriptionTop] = useState("73%");
   console.log({ title, description, imageUrl, selectedIcons }); // Debugging
 
@@ -130,7 +137,7 @@ function ItemCardTemplate({ title, description, imageUrl, selectedIcons }) {
             left: "50%",
             transform: "translateX(-50%)",
             zIndex: 3,
-            fontSize: "17px",
+            fontSize: "14px",
             color: "black",
             width: "calc(80% - 20px)",
             padding: "10px 0",
@@ -141,6 +148,21 @@ function ItemCardTemplate({ title, description, imageUrl, selectedIcons }) {
           }}
         >
           {description}
+        </Typography>
+        <Typography
+          variant="body2"
+          style={{
+            position: "absolute",
+            bottom: 18,
+            left: 45,
+            zIndex: 3,
+            fontSize: "10px",
+            fontFamily: "'IM Fell English SC', serif",
+            color: "black",
+            letterSpacing: "-.5px", // Adjust this value as needed
+          }}
+        >
+          {`Aggro: ${aggro} | Rounds: ${rounds}`}
         </Typography>
         <div
           style={{
