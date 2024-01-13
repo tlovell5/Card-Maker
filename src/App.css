@@ -85,7 +85,7 @@ textarea {
   width: 100%;
   height: 50%;
   position: absolute;
-  top: 14%; /* Adjust to lower the image */
+  top: 10%; /* Adjust to lower the image */
   left: 0%;
   z-index: 1;
 }
