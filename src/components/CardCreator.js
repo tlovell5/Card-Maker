@@ -148,7 +148,9 @@ function CardCreator() {
 
   const downloadCardImage = async () => {
     if (cardRef.current) {
-      const canvas = await html2canvas(cardRef.current);
+      const canvas = await html2canvas(cardRef.current, {
+        scale: 3, // Increase this value for higher resolution
+      });
       const image = canvas.toDataURL("image/png");
       const link = document.createElement("a");
       link.href = image;
@@ -161,7 +163,9 @@ function CardCreator() {
 
   const saveCardToDatabase = async () => {
     if (cardRef.current) {
-      const canvas = await html2canvas(cardRef.current);
+      const canvas = await html2canvas(cardRef.current, {
+        scale: 3, // Increase this value for higher resolution
+      });
       const cardImage = canvas.toDataURL("image/png");
 
       // Save this cardImage to Supabase
@@ -205,6 +209,9 @@ function CardCreator() {
           displayEmpty
           style={{ marginTop: 10 }}
         >
+          <MenuItem value="" disabled>
+            Select Icon
+          </MenuItem>
           {options.map((option) => (
             <MenuItem key={option} value={option}>
               {option}
@@ -222,15 +229,24 @@ function CardCreator() {
             onChange={(newCrop) => setCrop(newCrop)}
           />
         )}
-        <Button onClick={downloadCardImage} style={{ marginTop: "10px" }}>
+
+        <Button
+          onClick={downloadCardImage}
+          variant="contained" // Adds background color
+          color="primary" // Use primary theme color
+          style={{ marginTop: "10px", marginRight: "10px" }}
+        >
           Download Card
         </Button>
         <Button
           onClick={saveCardToDatabase}
-          style={{ marginTop: "10px", marginLeft: "10px" }}
+          variant="contained" // Adds background color
+          color="secondary" // Use secondary theme color
+          style={{ marginTop: "10px" }}
         >
           Save Card
         </Button>
+
         <Link to="/gallery" style={{ textDecoration: "none" }}></Link>
       </div>
       <div className="card-preview" ref={cardRef}>

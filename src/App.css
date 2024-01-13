@@ -123,3 +123,22 @@ textarea {
   flex-grow: 1;
   padding: 20px;
 }
+
+/* Additional styles for buttons in CardCreator */
+.input-container .MuiButton-contained {
+  margin-top: 10px;
+  margin-right: 10px;
+  border-radius: 4px;
+  padding: 10px 15px;
+}
+
+/* To further customize the button appearance */
+.input-container .MuiButton-containedPrimary {
+  background-color: #007bff; /* Custom primary color */
+  color: white;
+}
+
+.input-container .MuiButton-containedSecondary {
+  background-color: #28a745; /* Custom secondary color */
+  color: white;
+}
