@@ -155,7 +155,7 @@ function AbilityCardTemplate({
             bottom: 30,
             left: 30,
             zIndex: 3,
-            fontSize: "8.5px",
+            fontSize: "9.25px",
             fontFamily: "'IM Fell English SC', serif",
             color: "black",
             letterSpacing: "-.8px", // Adjust this value as needed
